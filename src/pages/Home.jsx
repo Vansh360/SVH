@@ -3,7 +3,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+
 export default function Home() {
+  const savedNotices = JSON.parse(localStorage.getItem("notices")) || [];
   // ✅ HERO SLIDER DATA
   const slides = [
     {
@@ -76,12 +78,10 @@ export default function Home() {
   }, []);
 
   // Notices
-  const notices = [
-    "Admissions Open for 2026-27 ✅ Apply Now",
-    "Unit Test will start from 5 Feb",
-    "Annual Function on 10 Feb 🎉",
-    "PTM Meeting scheduled on Saturday",
-  ];
+  {savedNotices.map((n, i) => (
+  <li key={i}>• {n}</li>
+))}
+
 
   // Events
   const events = [
