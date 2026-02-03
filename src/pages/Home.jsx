@@ -5,7 +5,10 @@ import { Link } from "react-router-dom";
 
 
 export default function Home() {
-  const savedNotices = JSON.parse(localStorage.getItem("notices")) || [];
+  const notices = JSON.parse(localStorage.getItem("notices")) || [];
+  const events = JSON.parse(localStorage.getItem("events")) || [];
+
+
   // ✅ HERO SLIDER DATA
   const slides = [
     {
@@ -78,18 +81,18 @@ export default function Home() {
   }, []);
 
   // Notices
-  {savedNotices.map((n, i) => (
-  <li key={i}>• {n}</li>
-))}
+//   {savedNotices.map((n, i) => (
+//   <li key={i}>• {n}</li>
+// ))}
 
 
   // Events
-  const events = [
-    { date: "05 Feb", title: "Unit Test Begins", desc: "Prepare well and attend regularly." },
-    { date: "10 Feb", title: "Annual Function", desc: "Cultural performances and awards." },
-    { date: "15 Feb", title: "Science Exhibition", desc: "Innovative student projects showcase." },
-    { date: "20 Feb", title: "Sports Day", desc: "Indoor & outdoor activities for all." },
-  ];
+  // const events = [
+  //   { date: "05 Feb", title: "Unit Test Begins", desc: "Prepare well and attend regularly." },
+  //   { date: "10 Feb", title: "Annual Function", desc: "Cultural performances and awards." },
+  //   { date: "15 Feb", title: "Science Exhibition", desc: "Innovative student projects showcase." },
+  //   { date: "20 Feb", title: "Sports Day", desc: "Indoor & outdoor activities for all." },
+  // ];
 
   // Testimonials
   const testimonials = [
