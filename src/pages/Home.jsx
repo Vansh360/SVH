@@ -80,7 +80,7 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
-  // Notices
+//   Notices
 //   {savedNotices.map((n, i) => (
 //   <li key={i}>• {n}</li>
 // ))}
