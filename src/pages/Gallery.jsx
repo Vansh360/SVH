@@ -4,14 +4,24 @@ import { useState } from "react";
 
 export default function Gallery() {
   const images = [
-    "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1519452630492-64a7a44b0f8e?auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1588072432836-7fb78b1d9d3e?auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1511629091441-ee46146481b6?auto=format&fit=crop&w=800&q=80",
+    // "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80",
+    // "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80",
+    // "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=800&q=80",
+    // "https://images.unsplash.com/photo-1519452630492-64a7a44b0f8e?auto=format&fit=crop&w=800&q=80",
+    // "https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=800&q=80",
+    // "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80",
+    // "https://images.unsplash.com/photo-1588072432836-7fb78b1d9d3e?auto=format&fit=crop&w=800&q=80",
+    // "https://images.unsplash.com/photo-1511629091441-ee46146481b6?auto=format&fit=crop&w=800&q=80",
+     "public/gallery/img1.jpg",
+    "public/gallery/img2.jpg",
+    "public/gallery/img3.jpg",
+    "public/gallery/img4.jpg",
+  
+  // process.env.PUBLIC_URL + "/gallery/img1.jpeg",
+  // process.env.PUBLIC_URL + "/gallery/img2.jpeg",
+  // process.env.PUBLIC_URL + "/gallery/img3.jpeg",
+  // process.env.PUBLIC_URL + "/gallery/img4.jpeg",
+
   ];
 
   const [lightbox, setLightbox] = useState({ open: false, src: "" });
