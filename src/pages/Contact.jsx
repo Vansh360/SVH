@@ -160,75 +160,50 @@
 
 
 
-// import React, { useState } from "react";
+import React, { useState } from "react";
 
-// export default function Contact() {
-//   const [form, setForm] = useState({
-//     name: "",
-//     email: "",
-//     phone: "",
-//     message: "",
-//   });
+export default function Contact() {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
 
-//   const handleChange = (e) => {
-//     setForm({ ...form, [e.target.name]: e.target.value });
-//   };
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-//     try {
-//       const res = await fetch("https://svv-backend.onrender.com/api/admission", {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify(form),
-//       });
+    try {
+      const res = await fetch("https://svv-backend.onrender.com/api/admission", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
 
-//       if (res.ok) {
-//         alert("Admission form submitted successfully ✅");
-//         setForm({
-//           name: "",
-//           email: "",
-//           phone: "",
-//           message: "",
-//         });
-//       } else {
-//         alert("Failed to submit form ❌");
-//       }
-//     } catch (error) {
-//       console.error(error);
-//       alert("Server error ❌");
-//     }
-//   };
-
-const API_URL =
-  window.location.hostname === "localhost"
-    ? "http://localhost:5000"
-    : "https://svv-school-backend.onrender.com";
-
-const handleSubmit = async (e) => {
-  e.preventDefault();
-
-  try {
-    const res = await fetch(`${API_URL}/api/admission`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(form),
-    });
-
-    if (res.ok) {
-      alert("Admission form submitted successfully ✅");
-    } else {
-      alert("Failed to submit form ❌");
+      if (res.ok) {
+        alert("Admission form submitted successfully ✅");
+        setForm({
+          name: "",
+          email: "",
+          phone: "",
+          message: "",
+        });
+      } else {
+        alert("Failed to submit form ❌");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Server error ❌");
     }
-  } catch (error) {
-    alert("Server error ❌");
-  }
-};
+  };
+
+
 
   return (
     <section id="admission">
