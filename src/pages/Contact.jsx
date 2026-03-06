@@ -1,53 +1,160 @@
-// import React from "react";
-
-// import { useEffect } from "react";
-// import { useLocation } from "react-router-dom";
+// import React, { useState } from "react";
 
 // export default function Contact() {
-//   const location = useLocation();
+//   const [form, setForm] = useState({
+//     studentName: "",
+//     dob: "",
+//     gender: "",
+//     classApplying: "",
+//     parentName: "",
+//     phone: "",
+//     email: "",
+//     address: "",
+//     previousSchool: "",
+//     message: "",
+//   });
 
-//   useEffect(() => {
-//     if (location.hash === "#admission") {
-//       const el = document.getElementById("admission");
-//       if (el) el.scrollIntoView({ behavior: "smooth" });
-//     }
-//   }, [location]);
+//   const handleChange = (e) => {
+//     setForm({ ...form, [e.target.name]: e.target.value });
+//   };
 
-//   function handleSubmit(e) {
+//   const handleSubmit = async (e) => {
 //     e.preventDefault();
-//     alert("Form Submitted ✅ We will contact you soon!");
-//     e.target.reset();
-//   }
+
+//     try {
+//       const res = await fetch("http://localhost:5000/api/admission", {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify(form),
+//       });
+
+//       if (res.ok) {
+//         alert("Admission form submitted successfully ✅");
+//         setForm({
+//           studentName: "",
+//           dob: "",
+//           gender: "",
+//           classApplying: "",
+//           parentName: "",
+//           phone: "",
+//           email: "",
+//           address: "",
+//           previousSchool: "",
+//           message: "",
+//         });
+//       } else {
+//         alert("Failed to submit admission form ❌");
+//       }
+//     } catch (error) {
+//       console.error(error);
+//       alert("Server error ❌");
+//     }
+//   };
 
 //   return (
-//     <section>
+//     <section id="admission">
 //       <div className="title">
-//         <h2>Contact Us</h2>
-//         <p>We are here to help you</p>
+//         <h2>Student Admission Form</h2>
+//         <p>Fill the form below to apply for admission</p>
 //       </div>
 
-//       <div id="admission"></div>
+//       <form onSubmit={handleSubmit} className="admission-form">
+//         <input
+//           type="text"
+//           name="studentName"
+//           placeholder="Student Full Name"
+//           value={form.studentName}
+//           onChange={handleChange}
+//           required
+//         />
 
-//       <div className="title">
-//         <h2>Admission Form</h2>
-//         <p>Fill this form to apply for admission</p>
-//       </div>
+//         <input
+//           type="date"
+//           name="dob"
+//           value={form.dob}
+//           onChange={handleChange}
+//           required
+//         />
 
-//       <form onSubmit={handleSubmit}>
-//         <input type="text" placeholder="Student Name" required />
-//         <input type="email" placeholder="Email" required />
-//         <textarea rows="4" placeholder="Enter Class & Message" required />
+//         <select
+//           name="gender"
+//           value={form.gender}
+//           onChange={handleChange}
+//           required
+//         >
+//           <option value="">Select Gender</option>
+//           <option value="Male">Male</option>
+//           <option value="Female">Female</option>
+//           <option value="Other">Other</option>
+//         </select>
+
+//         <select
+//           name="classApplying"
+//           value={form.classApplying}
+//           onChange={handleChange}
+//           required
+//         >
+//           <option value="">Class Applying For</option>
+//           <option value="FYJC Science">FYJC Science</option>
+//           <option value="SYJC Science">SYJC Science</option>
+//         </select>
+
+//         <input
+//           type="text"
+//           name="parentName"
+//           placeholder="Parent / Guardian Name"
+//           value={form.parentName}
+//           onChange={handleChange}
+//           required
+//         />
+
+//         <input
+//           type="text"
+//           name="phone"
+//           placeholder="Contact Number"
+//           value={form.phone}
+//           onChange={handleChange}
+//           required
+//         />
+
+//         <input
+//           type="email"
+//           name="email"
+//           placeholder="Email Address"
+//           value={form.email}
+//           onChange={handleChange}
+//           required
+//         />
+
+//         <textarea
+//           name="address"
+//           placeholder="Residential Address"
+//           value={form.address}
+//           onChange={handleChange}
+//           rows="3"
+//           required
+//         />
+
+//         <input
+//           type="text"
+//           name="previousSchool"
+//           placeholder="Previous School Name"
+//           value={form.previousSchool}
+//           onChange={handleChange}
+//         />
+
+//         <textarea
+//           name="message"
+//           placeholder="Additional Message / Remarks"
+//           value={form.message}
+//           onChange={handleChange}
+//           rows="3"
+//         />
+
 //         <button type="submit">Submit Admission</button>
 //       </form>
-
-//       <br /><br />
-
-//       <div className="title">
-//         <h2>School Address</h2>
-//         <p>Nagpur, Maharashtra, India</p>
-//         <p><b>Phone:</b> +91 98765 43210</p>
-//         <p><b>Email:</b> abc@gmail.com</p>
-//       </div>
 //     </section>
 //   );
 // }
@@ -72,7 +179,7 @@ export default function Contact() {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:5000/api/admission", {
+      const res = await fetch("https://svv-backend.onrender.com/api/admission", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -16,6 +16,12 @@ export default function Gallery() {
     "public/gallery/img2.jpg",
     "public/gallery/img3.jpg",
     "public/gallery/img4.jpg",
+    "public/gallery/img5.jpg",
+    "public/gallery/img6.jpg",
+    "public/gallery/img7.jpg",
+    "public/gallery/img8.jpg",
+    "public/gallery/img9.jpg",
+    "public/gallery/img10.jpg"
   
   // process.env.PUBLIC_URL + "/gallery/img1.jpeg",
   // process.env.PUBLIC_URL + "/gallery/img2.jpeg",
