@@ -178,13 +178,13 @@ export default function Contact() {
     e.preventDefault();
 
     try {
-      const res = await fetch("https://svv-backend.onrender.com/api/admission", {
+      const res = await fetch("https://svv-school-backend.onrender.com/api/admission",  {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(form),
-      });
+      }); 
 
       if (res.ok) {
         alert("Admission form submitted successfully ✅");
@@ -202,9 +202,6 @@ export default function Contact() {
       alert("Server error ❌");
     }
   };
-
-
-
   return (
     <section id="admission">
       <h2>Admission Form</h2>
@@ -236,6 +233,7 @@ export default function Contact() {
           onChange={handleChange}
           required
         />
+        
 
         <textarea
           name="message"
