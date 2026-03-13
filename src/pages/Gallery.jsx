@@ -12,16 +12,16 @@ export default function Gallery() {
     // "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80",
     // "https://images.unsplash.com/photo-1588072432836-7fb78b1d9d3e?auto=format&fit=crop&w=800&q=80",
     // "https://images.unsplash.com/photo-1511629091441-ee46146481b6?auto=format&fit=crop&w=800&q=80",
-     "public/gallery/img1.jpg",
-    "public/gallery/img2.jpg",
-    "public/gallery/img3.jpg",
-    "public/gallery/img4.jpg",
-    "public/gallery/img5.jpg",
-    "public/gallery/img6.jpg",
-    "public/gallery/img7.jpg",
-    "public/gallery/img8.jpg",
-    "public/gallery/img9.jpg",
-    "public/gallery/img10.jpg"
+     "/gallery/img1.jpg"
+    // "public/gallery/img2.jpg",
+    // "public/gallery/img3.jpg",
+    // "public/gallery/img4.jpg",
+    // "public/gallery/img5.jpg",
+    // "public/gallery/img6.jpg",
+    // "public/gallery/img7.jpg",
+    // "public/gallery/img8.jpg",
+    // "public/gallery/img9.jpg",
+    // "public/gallery/img10.jpg"
   
   // process.env.PUBLIC_URL + "/gallery/img1.jpeg",
   // process.env.PUBLIC_URL + "/gallery/img2.jpeg",

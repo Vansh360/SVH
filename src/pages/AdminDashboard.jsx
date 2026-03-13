@@ -143,7 +143,14 @@ export default function AdminDashboard() {
   const [events, setEvents] = useState([]);
   const [academics, setAcademics] = useState([]);
 
-  // Protect Route
+  const [admissions, setAdmissions] = useState([]);
+  const [search, setSearch] = useState("");
+
+  const API_URL =
+    window.location.hostname === "localhost"
+      ? "http://localhost:5000"
+      : "https://svv-school-backend.onrender.com";
+
   useEffect(() => {
     if (!localStorage.getItem("adminAuth")) {
       navigate("/admin");
@@ -152,11 +159,17 @@ export default function AdminDashboard() {
     setNotices(JSON.parse(localStorage.getItem("notices")) || []);
     setEvents(JSON.parse(localStorage.getItem("events")) || []);
     setAcademics(JSON.parse(localStorage.getItem("academics")) || []);
+
+    fetch(`${API_URL}/api/admissions`)
+      .then((res) => res.json())
+      .then((data) => setAdmissions(data))
+      .catch((err) => console.log(err));
   }, [navigate]);
 
   // Add Notice
   const addNotice = () => {
     if (!notice.trim()) return;
+
     const newData = [...notices, notice];
     setNotices(newData);
     localStorage.setItem("notices", JSON.stringify(newData));
@@ -166,6 +179,7 @@ export default function AdminDashboard() {
   // Add Event
   const addEvent = () => {
     if (!event.trim()) return;
+
     const newData = [...events, event];
     setEvents(newData);
     localStorage.setItem("events", JSON.stringify(newData));
@@ -175,13 +189,14 @@ export default function AdminDashboard() {
   // Add Academic
   const addAcademic = () => {
     if (!academic.trim()) return;
+
     const newData = [...academics, academic];
     setAcademics(newData);
     localStorage.setItem("academics", JSON.stringify(newData));
     setAcademic("");
   };
 
-  // Delete functions
+  // Delete Functions
   const deleteNotice = (index) => {
     const updated = notices.filter((_, i) => i !== index);
     setNotices(updated);
@@ -206,24 +221,53 @@ export default function AdminDashboard() {
     navigate("/admin");
   };
 
+  // Export CSV
+  const exportCSV = () => {
+    const rows = admissions.map(
+      (a) => `${a.name},${a.email},${a.phone},${a.message}`
+    );
+
+    const csv = "Name,Email,Phone,Message\n" + rows.join("\n");
+
+    const blob = new Blob([csv], { type: "text/csv" });
+    const url = window.URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "admissions.csv";
+    a.click();
+  };
+
+  const filteredAdmissions = admissions.filter((a) =>
+    a.name.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
-    <section>
+    <section style={{ padding: "30px" }}>
       <div className="title">
         <h2>Admin Dashboard</h2>
-        <button className="logout-btn" onClick={logout}>
-          Logout
-        </button>
+        <button onClick={logout}>Logout</button>
+      </div>
+
+      {/* Dashboard Stats */}
+      <div style={{ display: "flex", gap: "20px", marginBottom: "30px" }}>
+        <div>Notices: {notices.length}</div>
+        <div>Events: {events.length}</div>
+        <div>Academics: {academics.length}</div>
+        <div>Admissions: {admissions.length}</div>
       </div>
 
       {/* Notices */}
       <div className="admin-box">
         <h3>Manage Notices</h3>
+
         <input
           type="text"
           placeholder="Enter Notice"
           value={notice}
           onChange={(e) => setNotice(e.target.value)}
         />
+
         <button onClick={addNotice}>Add Notice</button>
 
         <ul>
@@ -239,12 +283,14 @@ export default function AdminDashboard() {
       {/* Events */}
       <div className="admin-box">
         <h3>Manage Events</h3>
+
         <input
           type="text"
           placeholder="Enter Event"
           value={event}
           onChange={(e) => setEvent(e.target.value)}
         />
+
         <button onClick={addEvent}>Add Event</button>
 
         <ul>
@@ -257,15 +303,17 @@ export default function AdminDashboard() {
         </ul>
       </div>
 
-      {/* ✅ Academics */}
+      {/* Academics */}
       <div className="admin-box">
         <h3>Manage Academics</h3>
+
         <input
           type="text"
           placeholder="Enter Academic Info"
           value={academic}
           onChange={(e) => setAcademic(e.target.value)}
         />
+
         <button onClick={addAcademic}>Add Academic</button>
 
         <ul>
@@ -276,6 +324,42 @@ export default function AdminDashboard() {
             </li>
           ))}
         </ul>
+      </div>
+
+      {/* Admission Requests */}
+      <div className="admin-box">
+        <h3>Admission Requests</h3>
+
+        <input
+          type="text"
+          placeholder="Search student"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+
+        <button onClick={exportCSV}>Export CSV</button>
+
+        <table border="1" cellPadding="10" style={{ marginTop: "20px" }}>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Message</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {filteredAdmissions.map((a, i) => (
+              <tr key={i}>
+                <td>{a.name}</td>
+                <td>{a.email}</td>
+                <td>{a.phone}</td>
+                <td>{a.message}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </section>
   );
