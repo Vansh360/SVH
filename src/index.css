@@ -867,3 +867,89 @@ body.dark form textarea {
 .card:hover{
   transform:translateY(-5px);
 }
+
+/* Admin Dashboard */
+
+.admin-container{
+  padding:40px;
+}
+
+.dashboard-stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:20px;
+  margin-bottom:40px;
+}
+
+.stat-card{
+  background:#ffffff;
+  padding:25px;
+  border-radius:12px;
+  box-shadow:0 4px 15px rgba(0,0,0,0.08);
+  text-align:center;
+  font-size:18px;
+  font-weight:600;
+}
+
+.admin-box{
+  background:white;
+  padding:25px;
+  border-radius:12px;
+  box-shadow:0 4px 15px rgba(0,0,0,0.08);
+  margin-bottom:30px;
+}
+
+.admin-box input{
+  padding:10px;
+  margin-right:10px;
+  border-radius:6px;
+  border:1px solid #ccc;
+}
+
+.admin-box button{
+  padding:8px 14px;
+  margin-left:10px;
+  background:#1d4ed8;
+  color:white;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.admin-box button:hover{
+  background:#0f3bb8;
+}
+
+.admin-box ul{
+  margin-top:15px;
+}
+
+.admin-box li{
+  margin-bottom:8px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:15px;
+}
+
+table th{
+  background:#1d4ed8;
+  color:white;
+  padding:10px;
+}
+
+table td{
+  padding:10px;
+  border-bottom:1px solid #ddd;
+}
+
+.logout-btn{
+  background:red;
+  padding:8px 14px;
+  border:none;
+  color:white;
+  border-radius:6px;
+  cursor:pointer;
+}

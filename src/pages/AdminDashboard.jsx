@@ -146,25 +146,33 @@ export default function AdminDashboard() {
   const [admissions, setAdmissions] = useState([]);
   const [search, setSearch] = useState("");
 
+//   const [gallery, setGallery] = useState([]);
+// const [image, setImage] = useState("");
+
+const [gallery, setGallery] = useState([]);
+const [imageFile, setImageFile] = useState(null);
+
   const API_URL =
     window.location.hostname === "localhost"
       ? "http://localhost:5000"
       : "https://svv-school-backend.onrender.com";
 
-  useEffect(() => {
-    if (!localStorage.getItem("adminAuth")) {
-      navigate("/admin");
-    }
+ useEffect(() => {
+  if (!localStorage.getItem("adminAuth")) {
+    navigate("/admin");
+  }
 
-    setNotices(JSON.parse(localStorage.getItem("notices")) || []);
-    setEvents(JSON.parse(localStorage.getItem("events")) || []);
-    setAcademics(JSON.parse(localStorage.getItem("academics")) || []);
+  setNotices(JSON.parse(localStorage.getItem("notices")) || []);
+  setEvents(JSON.parse(localStorage.getItem("events")) || []);
+  setAcademics(JSON.parse(localStorage.getItem("academics")) || []);
+  setGallery(JSON.parse(localStorage.getItem("gallery")) || []);
+}, [navigate]);
 
-    fetch(`${API_URL}/api/admissions`)
-      .then((res) => res.json())
-      .then((data) => setAdmissions(data))
-      .catch((err) => console.log(err));
-  }, [navigate]);
+  //   fetch(`${API_URL}/api/admissions`)
+  //     .then((res) => res.json())
+  //     .then((data) => setAdmissions(data))
+  //     .catch((err) => console.log(err));
+  // }, [navigate]);
 
   // Add Notice
   const addNotice = () => {
@@ -220,7 +228,22 @@ export default function AdminDashboard() {
     localStorage.removeItem("adminAuth");
     navigate("/admin");
   };
+const uploadImage = () => {
+  if (!imageFile) return;
 
+  const reader = new FileReader();
+
+  reader.onloadend = () => {
+    const base64Image = reader.result;
+
+    const newGallery = [...gallery, base64Image];
+    setGallery(newGallery);
+
+    localStorage.setItem("gallery", JSON.stringify(newGallery));
+  };
+
+  reader.readAsDataURL(imageFile);
+};
   // Export CSV
   const exportCSV = () => {
     const rows = admissions.map(
@@ -243,19 +266,20 @@ export default function AdminDashboard() {
   );
 
   return (
-    <section style={{ padding: "30px" }}>
+    // <section style={{ padding: "30px" }}>
+    <section className="admin-container">
       <div className="title">
         <h2>Admin Dashboard</h2>
         <button onClick={logout}>Logout</button>
       </div>
 
       {/* Dashboard Stats */}
-      <div style={{ display: "flex", gap: "20px", marginBottom: "30px" }}>
-        <div>Notices: {notices.length}</div>
-        <div>Events: {events.length}</div>
-        <div>Academics: {academics.length}</div>
-        <div>Admissions: {admissions.length}</div>
-      </div>
+     <div className="dashboard-stats">
+  <div className="stat-card">📢 Notices: {notices.length}</div>
+  <div className="stat-card">📅 Events: {events.length}</div>
+  <div className="stat-card">📚 Academics: {academics.length}</div>
+  <div className="stat-card">🎓 Admissions: {admissions.length}</div>
+</div>
 
       {/* Notices */}
       <div className="admin-box">
@@ -325,7 +349,40 @@ export default function AdminDashboard() {
           ))}
         </ul>
       </div>
+        {/* Gallery */}
+<div className="admin-box">
+  <h3>Manage Gallery</h3>
 
+  <input
+    type="file"
+    accept="image/*"
+    onChange={(e) => setImageFile(e.target.files[0])}
+  />
+
+  <button onClick={uploadImage}>Upload Image</button>
+
+  <div style={{marginTop:"15px"}}>
+
+    {gallery.map((img, i) => (
+      <div key={i} style={{marginBottom:"10px"}}>
+
+        <img src={img} alt="" width="120" />
+
+        <button
+          onClick={() => {
+            const updated = gallery.filter((_, index) => index !== i);
+            setGallery(updated);
+            localStorage.setItem("gallery", JSON.stringify(updated));
+          }}
+        >
+          Delete
+        </button>
+
+      </div>
+    ))}
+
+  </div>
+</div>
       {/* Admission Requests */}
       <div className="admin-box">
         <h3>Admission Requests</h3>
