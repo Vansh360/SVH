@@ -6,8 +6,18 @@ import { Link } from "react-router-dom";
 
 export default function Home() {
   const notices = JSON.parse(localStorage.getItem("notices")) || [];
-  const events = JSON.parse(localStorage.getItem("events")) || [];
-
+   const events = JSON.parse(localStorage.getItem("events")) || [];
+//    <div className="events-list">
+//   {events.length === 0 ? (
+//     <p>No upcoming events.</p>
+//   ) : (
+//     events.map((e, i) => (
+//       <div key={i} className="event-item">
+//         📅 {e}
+//       </div>
+//     ))
+//   )} 
+// </div>
 
   // ✅ HERO SLIDER DATA
   const slides = [
@@ -206,16 +216,17 @@ export default function Home() {
           <div className="box">
             <h2 className="box-title">📅 Upcoming Events</h2>
             <div className="events-list">
-              {events.map((e, i) => (
-                <div className="event-item" key={i}>
-                  <div className="event-date">{e.date}</div>
-                  <div>
-                    <h4>{e.title}</h4>
-                    <p>{e.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+  {events.length === 0 ? (
+    <p>No upcoming events.</p>
+  ) : (
+    events.map((e, i) => (
+      <div key={i} className="event-item">
+        📅 {e}
+      </div>
+    ))
+  )} 
+</div>
+
           </div>
         </div>
       </section>

@@ -953,3 +953,11 @@ table td{
   border-radius:6px;
   cursor:pointer;
 }
+
+.event-item{
+  background:#e9eef5;
+  padding:10px 15px;
+  border-radius:8px;
+  margin-top:10px;
+  font-size:16px;
+}

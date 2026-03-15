@@ -32,9 +32,15 @@
 //     </section>
 //   );
 // }
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 export default function Academics() {
+  const [academics, setAcademics] = useState([]);
+
+  useEffect(() => {
+    setAcademics(JSON.parse(localStorage.getItem("academics")) || []);
+  }, []);
+
   return (
     <section>
       <div className="title">
@@ -109,6 +115,26 @@ export default function Academics() {
         </div>
 
       </div>
+
+    {/* </section> */}
+  
+      <div className="title">
+        <h2>Academics</h2>
+        <p>Our courses and curriculum</p>
+      </div>
+
+      <div className="card-container">
+        {academics.length === 0 ? (
+          <p>No academic information added yet.</p>
+        ) : (
+          academics.map((a, i) => (
+            <div className="card" key={i}>
+              <p>{a}</p>
+            </div>
+          ))
+        )}
+      </div>
+
     </section>
   );
 }
