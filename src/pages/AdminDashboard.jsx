@@ -168,11 +168,14 @@ const [imageFile, setImageFile] = useState(null);
   setGallery(JSON.parse(localStorage.getItem("gallery")) || []);
 }, [navigate]);
 
-  //   fetch(`${API_URL}/api/admissions`)
-  //     .then((res) => res.json())
-  //     .then((data) => setAdmissions(data))
-  //     .catch((err) => console.log(err));
-  // }, [navigate]);
+   useEffect(() => {
+
+fetch(`${API_URL}/api/admissions`)
+  .then(res => res.json())
+  .then(data => setAdmissions(data))
+  .catch(err => console.log(err));
+
+},[]);
 
   // Add Notice
   const addNotice = () => {
@@ -246,6 +249,7 @@ const uploadImage = () => {
 };
   // Export CSV
   const exportCSV = () => {
+    console.log(admissions);
     const rows = admissions.map(
       (a) => `${a.name},${a.email},${a.phone},${a.message}`
     );
