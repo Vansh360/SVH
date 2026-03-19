@@ -276,10 +276,18 @@ export default function Contact() {
       <i className="fab fa-instagram"></i> Instagram
     </a>
   </div>
+  <a 
+  href="https://wa.me/91XXXXXXXXXX" 
+  target="_blank" 
+  rel="noopener noreferrer"
+  className="whatsapp-btn"
+>
+  <i className="fab fa-whatsapp"></i> Chat on WhatsApp
+</a>
 </div>
 {/* Map Contain  */}
 <div className="footer-section">
-  <h3>Our Location</h3>
+  <h3>Our Location</h3> 
 
   <div className="map-container">
     <iframe
