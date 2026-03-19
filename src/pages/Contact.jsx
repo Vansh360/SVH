@@ -161,7 +161,8 @@
 
 
 import React, { useState } from "react";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFacebook, faTwitter, faInstagram } from "@fortawesome/free-brands-svg-icons";
 export default function Contact() {
   const [form, setForm] = useState({
     name: "",
@@ -244,6 +245,54 @@ export default function Contact() {
 
         <button type="submit">Submit Admission</button>
       </form>
+      <div className="footer-social">
+  <h3>Connect With Us</h3>
+
+  <div className="social-buttons">
+    <a 
+      href="https://www.facebook.com/YOUR_ID" 
+      target="_blank" 
+      rel="noopener noreferrer"
+      className="social-btn facebook"
+    >
+      <i className="fab fa-facebook-f"></i> Facebook
+    </a>
+
+    <a 
+      href="https://twitter.com/YOUR_ID" 
+      target="_blank" 
+      rel="noopener noreferrer"
+      className="social-btn twitter"
+    >
+      <i className="fab fa-twitter"></i> Twitter
+    </a>
+
+    <a 
+      href="https://www.instagram.com/YOUR_ID" 
+      target="_blank" 
+      rel="noopener noreferrer"
+      className="social-btn instagram"
+    >
+      <i className="fab fa-instagram"></i> Instagram
+    </a>
+  </div>
+</div>
+{/* Map Contain  */}
+<div className="footer-section">
+  <h3>Our Location</h3>
+
+  <div className="map-container">
+    <iframe
+      src="https://www.google.com/maps?q=Pune,Maharashtra&output=embed"
+      width="100%"
+      height="200"
+      style={{ border: 0 }}
+      allowFullScreen=""
+      loading="lazy"
+      title="map"
+    ></iframe>
+  </div>
+</div>
     </section>
   );
 }

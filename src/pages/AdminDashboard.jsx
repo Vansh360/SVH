@@ -173,7 +173,7 @@ const [imageFile, setImageFile] = useState(null);
 fetch(`${API_URL}/api/admissions`)
   .then(res => res.json())
   .then(data => setAdmissions(data))
-  .catch(err => console.log(err));
+  .catch(err => console.log(err));  
 
 },[]);
 
