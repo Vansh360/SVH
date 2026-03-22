@@ -990,7 +990,7 @@ table td{
   color: white;
   font-weight: 500;
   transition: 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 10px hsla(0, 4%, 85%, 0.925);
 }
 
 /* Platform Colors */
@@ -1051,4 +1051,94 @@ table td{
 .whatsapp-btn:hover {
   background: #1ebe5d;
   transform: scale(1.05);
+}
+
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-title {
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  background: white;
+  list-style: none;
+  padding: 10px 0;
+  border-radius: 8px;
+  display: none;
+  min-width: 150px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.dropdown-menu li {
+  padding: 8px 15px;
+}
+
+.dropdown-menu li a {
+  text-decoration: none;
+  color: #333;
+}
+
+.dropdown-menu li:hover {
+  background: #f1f5f9;
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.page {
+  padding: 40px;
+  text-align: center;
+}
+
+.page-title {
+  font-size: 28px;
+  margin-bottom: 30px;
+}
+
+/* Card Container */
+.card-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Card Style */
+.card {
+  width: 220px;
+  padding: 15px;
+  border-radius: 12px;
+  background: #f8fafc;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: 0.3s;
+}
+
+.card img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* Hover Effect */
+.card:hover {
+  transform: translateY(-6px);
+}
+
+/* Success badge */
+.year {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 4px 10px;
+  background: #38bdf8;
+  color: white;
+  border-radius: 20px;
+  font-size: 12px;
 }
