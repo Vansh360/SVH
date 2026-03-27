@@ -144,9 +144,16 @@ export default function Navbar() {
       </div>
 
       <nav className="nav">
-        <div className="logo">
+        {/* <div className="logo">
           Sarvodaya Vidyalaya Junior Science College Hingna
-        </div>
+        </div> */}
+        <div className="logo">
+  <img src="/logo.png" alt="logo" />
+  <div>
+    <h3>SVV School</h3>
+    <p>Nagpur, Maharashtra</p>
+  </div>
+</div>
 
         <div className="right-controls">
           <button className="darkBtn" onClick={toggleDarkMode}>
@@ -241,6 +248,19 @@ export default function Navbar() {
   {/* </ul>
 </li> */}
         </ul>
+        <div className="top-bar">
+  <span>📥 Download Brochure</span>
+
+ <div className="top-buttons">
+  <Link to="/contact#admission">
+    <button className="enquire-btn">Enquire Now</button>
+  </Link>
+
+  <Link to="/disclosure">
+    <button className="disclosure-btn">Public Disclosure</button>
+  </Link>
+</div>
+</div>
       </nav>
     </header>
   );

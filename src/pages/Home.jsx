@@ -123,8 +123,11 @@ export default function Home() {
   return (
     <>
       {/* ✅ HERO SLIDER */}
-      <div
-        className="hero hero-slider"
+      {/* <div
+        className="hero hero-slider" */}
+  //       <div
+  key={current}
+  className="hero hero-slider fade-slide"
         style={{
           backgroundImage: `linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url(${slides[current].img})`,
         }}
@@ -144,7 +147,7 @@ export default function Home() {
               onClick={() =>
                 setCurrent((prev) => (prev - 1 + slides.length) % slides.length)
               }
-            >
+            > 
               ◀
             </button>
 
@@ -198,6 +201,7 @@ export default function Home() {
               View More →
             </Link>
           </div>
+
         </div>
       </section>
 
