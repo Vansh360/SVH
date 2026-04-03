@@ -30,6 +30,7 @@ const teachers = [
 export default function Teachers() {
   return (
     <div className="page">
+      <div className="container">
       <h2 className="page-title">Our Teachers</h2>
 
       <div className="card-container">
@@ -41,6 +42,7 @@ export default function Teachers() {
             <p>{t.experience} Experience</p>
           </div>
         ))}
+      </div>
       </div>
     </div>
   );

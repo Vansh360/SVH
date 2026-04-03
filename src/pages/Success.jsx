@@ -30,6 +30,7 @@ const successData = [
 export default function Success() {
   return (
     <div className="page">
+      <div className="container">
       <h2 className="page-title">Success Stories</h2>
 
       <div className="card-container">
@@ -42,6 +43,7 @@ export default function Success() {
           </div>
         ))}
       </div>
+    </div>
     </div>
   );
 }

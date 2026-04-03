@@ -38,6 +38,7 @@ const management = [
 export default function Management() {
   return (
     <div className="page">
+      <div className="container">
       <h2 className="page-title">Management Team</h2>
       <p className="page-subtitle">
         Meet the leaders guiding our institution towards excellence.
@@ -52,6 +53,7 @@ export default function Management() {
             <p className="message">“{m.message}”</p>
           </div>
         ))}
+      </div>
       </div>
     </div>
   );
