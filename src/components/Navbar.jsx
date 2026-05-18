@@ -8,6 +8,9 @@ export default function Navbar() {
   const [scrolled, setScrolled]   = useState(false);
   const [noticeHidden, setNoticeHidden] = useState(false);
   const [academicsOpen, setAcademicsOpen] = useState(false);
+  const [brochureData, setBrochureData] = useState(
+    localStorage.getItem("brochureData") || ""
+  );
   const location  = useLocation();
   const prevY     = useRef(0);
 
@@ -35,6 +38,15 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // ── Listen for brochure uploads from Admin ──
+  useEffect(() => {
+    const handleBrochureUpdate = () => {
+      setBrochureData(localStorage.getItem("brochureData") || "");
+    };
+    window.addEventListener("brochureUpdated", handleBrochureUpdate);
+    return () => window.removeEventListener("brochureUpdated", handleBrochureUpdate);
+  }, []);
+
   function toggleDarkMode() {
     const newMode = !dark;
     setDark(newMode);
@@ -46,6 +58,17 @@ export default function Navbar() {
       localStorage.setItem("mode", "light");
     }
   }
+
+  // ── Download brochure handler ──
+  const downloadBrochure = () => {
+    if (!brochureData) return;
+    const link = document.createElement("a");
+    link.href = brochureData;
+    link.download = localStorage.getItem("brochureName") || "SVV-School-Brochure.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   const isActive       = (path) => location.pathname === path;
   const isActivePrefix = (path) => location.pathname.startsWith(path);
@@ -394,17 +417,52 @@ export default function Navbar() {
           gap: 10px;
           flex-shrink: 0;
         }
-        .top-bar span {
-          font-size: 0.78rem;
-          color: var(--muted);
-          cursor: pointer;
-          white-space: nowrap;
-          transition: color 0.2s;
+
+        /* ── Brochure button styles ── */
+        .brochure-btn {
           display: flex;
           align-items: center;
-          gap: 5px;
+          gap: 6px;
+          font-size: 0.78rem;
+          font-family: 'DM Sans', sans-serif;
+          font-weight: 500;
+          white-space: nowrap;
+          border-radius: 8px;
+          padding: 8px 14px;
+          cursor: pointer;
+          transition: all 0.22s;
+          border: none;
+          outline: none;
         }
-        .top-bar span:hover { color: var(--gold-light); }
+        .brochure-btn.active {
+          background: rgba(201,146,42,0.15);
+          border: 1px solid rgba(201,146,42,0.45);
+          color: var(--gold-light);
+        }
+        .brochure-btn.active:hover {
+          background: rgba(201,146,42,0.28);
+          border-color: var(--gold-light);
+          color: #fff;
+          transform: translateY(-1px);
+          box-shadow: 0 4px 14px rgba(201,146,42,0.22);
+        }
+        .brochure-btn.inactive {
+          background: rgba(255,255,255,0.04);
+          border: 1px solid rgba(255,255,255,0.1);
+          color: rgba(255,255,255,0.28);
+          cursor: not-allowed;
+        }
+        .brochure-pulse {
+          width: 7px; height: 7px;
+          border-radius: 50%;
+          background: var(--gold);
+          animation: pulse 1.8s ease-in-out infinite;
+          flex-shrink: 0;
+        }
+        @keyframes pulse {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50%       { opacity: 0.4; transform: scale(0.7); }
+        }
 
         .top-buttons {
           display: flex;
@@ -516,7 +574,7 @@ export default function Navbar() {
         .mob-sub-link:hover::before,
         .mob-sub-link.activeLink::before { opacity: 1; }
 
-        .mob-cta-wrap { padding: 14px 6vw 20px; }
+        .mob-cta-wrap { padding: 14px 6vw 20px; display: flex; flex-direction: column; gap: 10px; }
         .mob-cta {
           display: flex;
           align-items: center;
@@ -535,13 +593,45 @@ export default function Navbar() {
         }
         .mob-cta:hover { background: var(--gold-light); }
 
+        /* Mobile brochure button */
+        .mob-brochure-btn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          padding: 13px;
+          border-radius: 9px;
+          font-family: 'DM Sans', sans-serif;
+          font-weight: 600;
+          font-size: 0.9rem;
+          border: none;
+          cursor: pointer;
+          transition: all 0.25s;
+          width: 100%;
+        }
+        .mob-brochure-btn.active {
+          background: rgba(201,146,42,0.15);
+          border: 1.5px solid rgba(201,146,42,0.5);
+          color: var(--gold-light);
+        }
+        .mob-brochure-btn.active:hover {
+          background: rgba(201,146,42,0.25);
+          color: #fff;
+        }
+        .mob-brochure-btn.inactive {
+          background: rgba(255,255,255,0.05);
+          border: 1.5px solid rgba(255,255,255,0.1);
+          color: rgba(255,255,255,0.3);
+          cursor: not-allowed;
+        }
+
         body.dark .nav          { background: #050d1a; }
         body.dark .nav.scrolled { background: rgba(5,13,26,0.97); }
         body.dark .notice-bar   { background: linear-gradient(90deg, #a07018, #7a5210, #a07018); }
         body.dark .mobile-panel { background: #0b1a30; }
 
         @media (max-width: 1180px) {
-          .top-bar span { display: none; }
+          .top-bar .brochure-btn span.label { display: none; }
         }
         @media (max-width: 1060px) {
           .top-bar { display: none; }
@@ -617,7 +707,6 @@ export default function Navbar() {
               <Link className={isActive("/teachers") ? "activeLink" : ""} to="/teachers">Teachers</Link>
             </li>
 
-            {/* ✅ PRINCIPAL LINK — DESKTOP */}
             <li>
               <Link className={isActive("/principal") ? "activeLink" : ""} to="/principal">Principal</Link>
             </li>
@@ -650,9 +739,20 @@ export default function Navbar() {
             </button>
           </div>
 
-          {/* Top Bar — Brochure + CTA Buttons */}
+          {/* ── Top Bar — Brochure + CTA Buttons ── */}
           <div className="top-bar">
-            <span>📥 Download Brochure</span>
+
+            {/* Download Brochure — active only when PDF uploaded by admin */}
+            <button
+              className={`brochure-btn ${brochureData ? "active" : "inactive"}`}
+              onClick={downloadBrochure}
+              title={brochureData ? "Download School Brochure (PDF)" : "No brochure uploaded yet"}
+            >
+              {brochureData && <span className="brochure-pulse" />}
+              📥
+              <span className="label">Download Brochure</span>
+            </button>
+
             <div className="top-buttons">
               <Link to="/contact#admission">
                 <button className="enquire-btn">Enquire Now</button>
@@ -698,16 +798,23 @@ export default function Navbar() {
           </div>
 
           <Link to="/teachers"   className={`mob-link ${isActive("/teachers")   ? "activeLink" : ""}`}>Teachers</Link>
-
-          {/* ✅ PRINCIPAL LINK — MOBILE */}
           <Link to="/principal"  className={`mob-link ${isActive("/principal")  ? "activeLink" : ""}`}>Principal</Link>
-
           <Link to="/management" className={`mob-link ${isActive("/management") ? "activeLink" : ""}`}>Management</Link>
           <Link to="/gallery"    className={`mob-link ${isActive("/gallery")    ? "activeLink" : ""}`}>Gallery</Link>
           <Link to="/success"    className={`mob-link ${isActive("/success")    ? "activeLink" : ""}`}>Success</Link>
           <Link to="/contact"    className={`mob-link ${isActive("/contact")    ? "activeLink" : ""}`}>Contact</Link>
 
           <div className="mob-cta-wrap">
+            {/* Mobile Download Brochure */}
+            <button
+              className={`mob-brochure-btn ${brochureData ? "active" : "inactive"}`}
+              onClick={downloadBrochure}
+              disabled={!brochureData}
+              title={brochureData ? "Download School Brochure" : "No brochure uploaded yet"}
+            >
+              📥 {brochureData ? "Download Brochure" : "Brochure Not Available"}
+            </button>
+
             <Link to="/contact#admission" className="mob-cta">📋 Apply for Admission</Link>
           </div>
 
