@@ -64,15 +64,15 @@ A modern full-stack school management website built using **React.js, Node.js, E
 
 ### Frontend Website
 
-https://your-frontend-link.onrender.com
+https://vansh360.github.io/SVH/
 
 ### Backend API
+https://svv-school-backend.onrender.com/api/admissions
 
-https://your-backend-link.onrender.com
 
 ### Admin Panel
 
-https://your-frontend-link.onrender.com/admin
+https://vansh360.github.io/SVH/#/admin-dashboard
 
 ---
 
