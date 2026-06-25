@@ -1,0 +1,38 @@
+%PDF-1.1
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 400 200] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 88 >>
+stream
+BT /F1 14 Tf 24 150 Td (Sarvodaya Vidyalaya) Tj
+24 134 Td (Hall Ticket - Sample) Tj
+24 118 Td (Student Name: ____________________) Tj
+24 102 Td (Roll No: __________________________) Tj
+24 86 Td (Exam: Annual Examination 2026) Tj
+24 70 Td (Venue: Sarvodaya Vidyalaya, Hingna) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000010 00000 n 
+0000000061 00000 n 
+0000000118 00000 n 
+0000000240 00000 n 
+0000000350 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+460
+%%EOF
